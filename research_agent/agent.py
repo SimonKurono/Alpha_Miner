@@ -32,6 +32,6 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(filename)s:%(lineno)s %(levelname)s:%(message)s",
 )
-print("Logging is complete.")
+print("Logging is complete. ")
 
 
