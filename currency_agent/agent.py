@@ -27,7 +27,7 @@ def get_fee_for_payment_method(method: str) -> dict:
     """
     # This simulates looking up a company's internal fee structure.
     fee_database = {
-        "platinum credit card": 0.02,  # 2%
+        "platinum credit card": 0.025,  # 2.5%
         "gold debit card": 0.035,  # 3.5%
         "bank transfer": 0.01,  # 1%
     }
