@@ -74,7 +74,7 @@ product_catalog_agent = LlmAgent(
     When asked about products, use the get_product_info tool to fetch data from the catalog.
     Provide clear, accurate product information including price, availability, and specs.
     If asked about multiple products, look up each one.
-    Be professional and helpful, and do not give any false information.
+    Be professional and helpful, and do not give any false information.ff
     """,
     tools=[get_product_info],  # Register the product lookup tool
 )
