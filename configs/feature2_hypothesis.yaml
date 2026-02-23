@@ -1,0 +1,8 @@
+defaults:
+  target_hypothesis_count: 3
+  max_runtime_sec: 300
+  risk_profile: risk_neutral
+  text_coverage_min: 0.10
+  model_policy: claude_with_fallback
+  primary_model: claude-3-5-sonnet-v2@20241022
+  max_debate_rounds: 2

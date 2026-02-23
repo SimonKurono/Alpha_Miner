@@ -1,0 +1,5 @@
+defaults:
+  target_factor_count: 10
+  max_runtime_sec: 300
+  originality_min: 0.20
+  complexity_max: 16

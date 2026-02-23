@@ -1,0 +1,125 @@
+defaults:
+  benchmark: SPY
+  max_runtime_sec: 300
+  risk_profile: risk_neutral
+  start_date: "2020-01-01"
+  end_date: "2024-12-31"
+  min_symbol_coverage: 0.85
+  request_timeout_sec: 30
+
+providers:
+  market:
+    primary: stooq
+    retries: 3
+  text:
+    sec:
+      filing_types: ["10-K", "10-Q"]
+      anchor_mode: run_window
+      lookback_days: 365
+    news:
+      primary: gdelt
+      max_docs_per_symbol: 50
+
+universe:
+  name: sp100_prototype
+  symbols:
+    - AAPL
+    - MSFT
+    - NVDA
+    - AMZN
+    - GOOGL
+    - GOOG
+    - META
+    - BRK.B
+    - JPM
+    - V
+    - JNJ
+    - WMT
+    - XOM
+    - MA
+    - PG
+    - UNH
+    - HD
+    - COST
+    - BAC
+    - ABBV
+    - KO
+    - ORCL
+    - AVGO
+    - PFE
+    - CVX
+    - CSCO
+    - MRK
+    - CRM
+    - ACN
+    - MCD
+    - TMO
+    - DHR
+    - ABT
+    - CMCSA
+    - WFC
+    - AMD
+    - LIN
+    - TXN
+    - DIS
+    - VZ
+    - PM
+    - NEE
+    - NFLX
+    - RTX
+    - BMY
+    - QCOM
+    - HON
+    - LOW
+    - UNP
+    - SPGI
+    - AMGN
+    - IBM
+    - CAT
+    - GS
+    - COP
+    - SCHW
+    - INTC
+    - PLD
+    - NOW
+    - T
+    - SBUX
+    - ADP
+    - GE
+    - BKNG
+    - DE
+    - ELV
+    - ISRG
+    - SYK
+    - ADBE
+    - BLK
+    - C
+    - MDT
+    - GILD
+    - LMT
+    - MMC
+    - MDLZ
+    - CI
+    - CB
+    - AMAT
+    - MO
+    - ZTS
+    - DUK
+    - SO
+    - PGR
+    - TJX
+    - USB
+    - APD
+    - NKE
+    - ETN
+    - PNC
+    - EQIX
+    - CL
+    - EOG
+    - FIS
+    - HCA
+    - SHW
+    - KHC
+    - ICE
+    - CME
+    - UPS

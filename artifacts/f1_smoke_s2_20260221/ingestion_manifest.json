@@ -1,0 +1,16 @@
+{
+  "run_id": "f1_smoke_s2_20260221",
+  "market_path": "data/processed/ingestion/f1_smoke_s2_20260221/market_normalized.jsonl",
+  "text_path": "data/processed/ingestion/f1_smoke_s2_20260221/text_normalized.jsonl",
+  "quality_path": "artifacts/f1_smoke_s2_20260221/ingestion_quality.json",
+  "row_counts": {
+    "market": 12580,
+    "text": 0
+  },
+  "raw_artifacts": {
+    "stooq": "data/raw/ingestion/f1_smoke_s2_20260221/market_stooq.json",
+    "sec": "data/raw/ingestion/f1_smoke_s2_20260221/text_sec_filings.json",
+    "gdelt": "data/raw/ingestion/f1_smoke_s2_20260221/text_gdelt_news.json"
+  },
+  "created_at": "2026-02-21T14:18:27.330834Z"
+}

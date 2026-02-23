@@ -1,0 +1,130 @@
+{
+  "symbols_total": 10,
+  "symbols_with_any_text": 1,
+  "symbol_rows": [
+    {
+      "symbol": "AAPL",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing"
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "META",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "JPM",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "XOM",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "UNH",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "BRK.B",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "no_text_docs"
+      ]
+    }
+  ],
+  "top_missing_reasons": {
+    "gdelt_missing": 10,
+    "sec_missing": 9,
+    "no_text_docs": 9
+  },
+  "run_id": "f1_smoke_s1_postfix_20260223"
+}

@@ -1,0 +1,16 @@
+{
+  "source": "gdelt",
+  "missing_symbols": [
+    "AAPL",
+    "AMZN",
+    "BRK.B",
+    "GOOGL",
+    "JPM",
+    "META",
+    "MSFT",
+    "NVDA",
+    "UNH",
+    "XOM"
+  ],
+  "documents": []
+}
