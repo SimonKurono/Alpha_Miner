@@ -132,6 +132,7 @@ def test_feature2_e2e_hard_gate_failure(tmp_path, monkeypatch):
             "run_id": "f2_test_gate_fail",
             "ingestion_run_id": "ing_bad",
             "model_policy": "deterministic_only",
+            "text_coverage_min": 0.20,
         }
     )
 

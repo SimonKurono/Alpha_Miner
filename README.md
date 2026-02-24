@@ -1,53 +1,138 @@
-# Google AI Agents
+# Alpha Miner
 
-This repository contains a collection of AI agents built using the Google Agent Development Kit (ADK) and Gemini 2.x models. Each module demonstrates specific architectural patterns and capabilities for building sophisticated agentic workflows.
+An agentic framework for discovering, evaluating, and refining quantitative alpha signals. Built with the **Google Agent Development Kit (ADK)** and **Gemini 2.x** models.
 
-## Core Technologies
-- **Google ADK**: A framework for building multi-agent systems with built-in support for tool use, loops, and sequential workflows.
-- **Gemini 2.x Models**: Leveraging latest generative models for reasoning and tool orchestration.
-- **Python-based agents**: All agents are implemented in Python with extensibility in mind.
+Alpha Miner automates the quant research workflow — from raw data ingestion through hypothesis generation, factor construction, backtesting, and research-note writing — using specialized AI agents that collaborate, debate, and iterate.
 
-## Agent Modules
+## Architecture
 
-### [Blog Post Agent](./blog_post_agent/)
-Implements an iterative refinement workflow. It uses a **LoopAgent** where a **CriticAgent** provides feedback on initial drafts, and a **RefinerAgent** incorporates that feedback until the content is approved.
+The system is organized as a multi-agent pipeline with five core stages:
 
-### [Currency Agent](./currency_agent/)
-Demonstrates agent-to-agent delegation. An orchestration agent uses a specialized **CalculationAgent** (configured with a code executor) as a tool to perform precise arithmetic, while fetching real-time data via functional tools.
+1. **Data Ingestion** — Parallel retrieval of market data (prices, volume, returns) and unstructured text (SEC 10-K/10-Q filings, news/sentiment).
+2. **Hypothesis Generation** — LLM-driven generation of explicit factor theses, conditioned on risk tolerance and grounded in ingested data.
+3. **Factor Construction** — Translation of hypotheses into formulaic factor expressions via a custom DSL, with AST-based originality and complexity scoring.
+4. **Evaluation Loop** — Backtesting with walk-forward validation, computing Sharpe ratio, Information Coefficient, turnover, and decay analysis.
+5. **Report Generation** — Automated research-note writing summarizing promoted factors and their evidence.
 
-### [E-commerce Agent](./ecommerce_agent/)
-Showcases remote agent interaction using the **Agent-to-Agent (A2A)** protocol. A root agent delegates product-specific queries to a remote catalog agent served via a web API.
+### Agent Tree
 
-### [Image Gen Agent](./image_gen_agent/)
-Features integration with the **Model Context Protocol (MCP)**. It uses an external MCP server to generate images based on natural language prompts.
+| Agent | Type | Responsibility |
+|---|---|---|
+| Root Orchestrator | `SequentialAgent` | Coordinates the end-to-end pipeline |
+| Data Ingestion Agent | `ParallelAgent` | SEC EDGAR + market data retrieval with caching |
+| Hypothesis Generation Agent | `LlmAgent` | Generates factor theses with risk-tolerance conditioning |
+| Factor Construction Agent | `SequentialAgent` | DSL parsing, AST validation, code generation, originality/complexity scoring |
+| Evaluation Agent | `LoopAgent` | Backtest execution, metrics computation, promotion decisions |
+| Report Agent | `LlmAgent` | Research note generation |
 
-### [Research Agent](./research_agent/)
-Focuses on observability and platform extensibility. It utilizes **Plugins** for comprehensive logging and monitoring of agent execution flows.
+### Factor DSL
 
-### [Stateful Agent](./stateful_agent/)
-Implements session management and persistent memory. It uses a **DatabaseSessionService** with SQLite to maintain conversation history across different user sessions.
+Factors are expressed in a constrained domain-specific language supporting:
+- **Operations:** `Rank()`, `Normalize()`, `WinsorizedSum()`, `Delay()`, `Sum()`
+- **Arithmetic:** `+`, `-`, `*`, `/`
+- **Fields:** `close`, `volume`, `market_cap`, `returns_1d`, `returns_5d`
+
+Example:
+```
+Rank(close / Delay(close, 5)) * 0.6 + Rank(Normalize(volume)) * 0.4
+```
+
+Expressions are parsed into an AST and scored for **complexity** (`node_count + 2*depth + variety_bonus`) and **originality** (Levenshtein distance on AST serialization vs. existing factor library).
 
 ## Project Structure
-- `blog_post_agent/`: Sequential and loop agent implementations.
-- `currency_agent/`: Tool use and sub-agent delegation.
-- `ecommerce_agent/`: Remote agent communication (A2A).
-- `image_gen_agent/`: MCP tool integration.
-- `research_agent/`: Logging and observability plugins.
-- `stateful_agent/`: Persistence and session management.
-- `observability.ipynb`: Interactive notebook for exploring agent logs.
-- `requirements.txt`: Project dependencies including Google Cloud and GenAI libraries.
+
+```
+src/alpha_miner/
+├── agents/
+│   ├── data_ingestion/       # SEC EDGAR + market data retrieval
+│   ├── hypothesis_generation/# LLM-driven factor thesis generation
+│   └── factor_construction/  # DSL → AST → code pipeline
+├── tools/
+│   └── factors/              # DSL parser, AST nodes, validators, scoring
+└── pipelines/                # CLI entrypoints for each feature
+
+configs/                      # YAML configs per feature stage
+docs/
+├── feature_plans/            # Design docs for each feature
+├── runbooks/                 # Operational guides
+└── validation/               # Smoke-test and regression reports
+tests/                        # Unit + integration tests
+other_agents/                 # Reference ADK agent examples (blog, currency, e-commerce, etc.)
+```
+
+## Current Status
+
+| Feature | Status | Notes |
+|---|---|---|
+| Feature 1 — Data Ingestion | Complete | SEC EDGAR + market data with caching layer |
+| Feature 2 — Hypothesis Generation | Active (temporary gate) | `text_coverage_min` temporarily lowered to `0.10` |
+| Feature 3 — Factor Construction | MVP complete | DSL parser, AST validation, scoring, CLI all operational |
+| Feature 4 — Backtesting Loop | Not started | Next milestone |
+
+**Test suite:** 41 passing | **Feature 3 smoke:** 10 candidates generated, 3 accepted
 
 ## Setup
-1. Create a virtual environment:
+
+1. **Clone and create a virtual environment:**
    ```bash
+   git clone <repo-url> && cd Google_Agents
    python -m venv venv
    source venv/bin/activate
    ```
-2. Install dependencies:
+
+2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
-3. Configure environment variables in a `.env` file:
+
+3. **Configure environment variables** in a `.env` file:
    ```env
    GOOGLE_API_KEY=your_api_key_here
    ```
+
+## Usage
+
+Run individual pipeline stages via CLI:
+
+```bash
+# Feature 2 — Hypothesis generation
+python -m alpha_miner.pipelines.feature2_hypothesis_cli
+
+# Feature 3 — Factor construction
+python -m alpha_miner.pipelines.feature3_factor_cli
+```
+
+Run the test suite:
+
+```bash
+pytest tests/
+```
+
+## Data Sources
+
+| Source | Data | Notes |
+|---|---|---|
+| SEC EDGAR | 10-K/10-Q filings, XBRL fundamentals | Rate-limited to 10 req/s |
+| yfinance | Price, volume, returns | Free; abstracted behind data-provider interface |
+| FRED API | Macro series | Optional |
+| GDELT | News text / sentiment | Optional |
+
+## Research Grounding
+
+This project draws on:
+
+- **AlphaAgents** (arXiv:2508.11152) — Specialized analyst-role agents, internal debate/consensus, risk-tolerance conditioning.
+- **AlphaAgent** (arXiv:2502.16789) — Originality enforcement via AST similarity, hypothesis-factor alignment scoring, complexity control.
+- **Google ADK** — Multi-agent orchestration with `SequentialAgent`, `ParallelAgent`, `LoopAgent`, tool contracts, and session state management.
+
+## Key Documentation
+
+- [`blueprint.md`](blueprint.md) — Full technical specification and design decisions
+- [`context.md`](context.md) — Living project state tracker (current session, blockers, next actions)
+- [`docs/feature_plans/`](docs/feature_plans/) — Per-feature design documents
+- [`docs/runbooks/`](docs/runbooks/) — Operational guides for running each feature
+- [`docs/validation/`](docs/validation/) — Smoke-test and regression reports
+
+## Disclaimer
+
+Alpha Miner is an educational and research tool. It does not constitute financial advice. All backtesting results are hypothetical and subject to known limitations including survivorship bias and look-ahead bias (documented and mitigated where possible).

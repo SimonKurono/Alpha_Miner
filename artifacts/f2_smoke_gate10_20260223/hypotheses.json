@@ -1,0 +1,63 @@
+{
+  "run_id": "f2_smoke_gate10_20260223",
+  "ingestion_run_id": "f1_smoke_s2_postfix_20260223",
+  "hypotheses": [
+    {
+      "hypothesis_id": "fundamental_h1",
+      "thesis": "Firms with recent SEC filing activity and stable positive 1M returns are more likely to outperform over the next month.",
+      "horizon_days": 21,
+      "direction": "long_only",
+      "evidence_summary": "SEC 10-K/10-Q presence plus recent return persistence suggests continued fundamental drift.",
+      "supporting_symbols": [
+        "AAPL",
+        "AMZN",
+        "BRK.B",
+        "GOOGL",
+        "JPM"
+      ],
+      "originating_roles": [
+        "fundamental"
+      ],
+      "confidence": 0.63,
+      "score_total": 0.5200416666666667
+    },
+    {
+      "hypothesis_id": "valuation_h1",
+      "thesis": "Large-cap names with moderate pullbacks and resilient liquidity may mean-revert positively over the next quarter.",
+      "horizon_days": 63,
+      "direction": "long_only",
+      "evidence_summary": "Market cap and volume stability indicate tradability; pullback regimes can revert on medium horizons.",
+      "supporting_symbols": [
+        "AAPL",
+        "AMZN",
+        "BRK.B",
+        "GOOGL",
+        "JPM"
+      ],
+      "originating_roles": [
+        "valuation"
+      ],
+      "confidence": 0.6,
+      "score_total": 0.5097916666666666
+    },
+    {
+      "hypothesis_id": "sentiment_h1",
+      "thesis": "Stocks with positive recent news flow and supportive short-term momentum tend to deliver excess returns over a 1-week horizon.",
+      "horizon_days": 5,
+      "direction": "long_short",
+      "evidence_summary": "News mentions combined with short-term return direction can proxy sentiment persistence.",
+      "supporting_symbols": [
+        "AAPL",
+        "AMZN",
+        "BRK.B",
+        "GOOGL",
+        "JPM"
+      ],
+      "originating_roles": [
+        "sentiment"
+      ],
+      "confidence": 0.58,
+      "score_total": 0.49066666666666664
+    }
+  ]
+}
