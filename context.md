@@ -1,70 +1,64 @@
 # Alpha Miner - Project Context
-*Last updated: 2026-02-23 23:56 UTC | Session: s006*
+*Last updated: 2026-02-27 11:24 UTC | Session: s012*
 
 ---
 
 ## 🎯 CURRENT STATE
-**Phase:** Feature 3 Kickoff Implemented (Factor Construction)  
-**Completion:** 58% overall (Feature 1 complete, Feature 2 unblocked under temporary policy, Feature 3 MVP implemented)  
-**Status:** ✅ `GO_TEMPORARY` for Feature 3 progression  
-**Next Milestone:** Expand Feature 3 quality + begin Feature 4 backtesting loop
+**Phase:** UI Intuition + Gemini Connectivity Cycle  
+**Completion:** 97% overall  
+**Status:** ⚠️ `GO_PENDING_LOCAL_GEMINI_LIVE_CHECK`  
+**Next Milestone:** Local live Gemini+Search smoke + deployment hardening
 
 ---
 
 ## 🔥 THIS SESSION
-**Goal:** Apply temporary Feature 2 gate reduction and implement Feature 3 factor-construction MVP.
+**Goal:** Make UI intuitive and add Feature 2 Gemini + Google Search connectivity with strict health diagnostics.
 
 **Tasks Completed:**
-1. Lowered Feature 2 gate default from `0.20` to `0.10`.
-2. Documented temporary gate override and restore trigger.
-3. Implemented full Feature 3 pipeline (agents, DSL parser/AST, scoring, CLI, docs, tests).
-4. Executed Feature 2 smoke with lowered gate.
-5. Executed Feature 3 smoke and validated 10 candidate output.
+1. Extended Feature 2 model policy and schema contracts:
+   - Added `gemini_with_search` and `gemini_only`.
+   - Added `gemini_model` and `enable_google_search_tool`.
+2. Implemented Gemini backend in model factory with deterministic fallback behavior.
+3. Added model trace persistence:
+   - `artifacts/<run_id>/model_trace.json`
+4. Added strict runtime agent health contract in `runtime_utils`.
+5. Reworked Streamlit UI to executive-first:
+   - run story sections
+   - status chips
+   - preflight checks for Feature 2
+   - debug-only JSON pattern
+   - Altair visualizations in dashboard/library
+6. Updated unit/integration tests for new model and runtime logic.
+7. Updated runbooks and published validation report.
+8. Patched Streamlit deprecation warnings by replacing `use_container_width` with `width="stretch"` across UI tables/charts.
 
 ---
 
 ## ✅ COMPLETED (Recent)
 
-### Feature 2 Temporary Gate Policy
-- [x] `configs/feature2_hypothesis.yaml`: `text_coverage_min=0.10`
-- [x] `src/alpha_miner/agents/hypothesis_generation/config_loader.py`: fallback default `0.10`
-- [x] `docs/runbooks/feature2_hypothesis.md`: temporary override + restore trigger documented
+### Feature 2 Connectivity
+- [x] `src/alpha_miner/agents/hypothesis_generation/schemas.py`
+- [x] `src/alpha_miner/agents/hypothesis_generation/config_loader.py`
+- [x] `src/alpha_miner/agents/hypothesis_generation/run_config_agent.py`
+- [x] `src/alpha_miner/agents/hypothesis_generation/model_factory.py`
+- [x] `src/alpha_miner/agents/hypothesis_generation/role_agents.py`
+- [x] `src/alpha_miner/agents/hypothesis_generation/artifact_publisher_agent.py`
+- [x] `src/alpha_miner/pipelines/feature2_hypothesis_cli.py`
+- [x] `configs/feature2_hypothesis.yaml`
 
-### Feature 3 Implementation
-- [x] Added `src/alpha_miner/agents/factor_construction/`:
-  - `schemas.py`
-  - `base_custom_agent.py`
-  - `config_loader.py`
-  - `runtime_control.py`
-  - `run_config_agent.py`
-  - `artifact_loader_agent.py`
-  - `factor_generation_agent.py`
-  - `dsl_validation_agent.py`
-  - `originality_complexity_agent.py`
-  - `artifact_publisher_agent.py`
-  - `workflow.py`
-- [x] Added `src/alpha_miner/tools/factors/`:
-  - `ast_nodes.py`
-  - `dsl_parser.py`
-  - `validators.py`
-  - `scoring.py`
-  - `interfaces.py`
-- [x] Added CLI: `src/alpha_miner/pipelines/feature3_factor_cli.py`
-- [x] Added config: `configs/feature3_factor.yaml`
-- [x] Added docs:
-  - `docs/feature_plans/feature3.md`
-  - `docs/runbooks/feature3_factor.md`
-- [x] Added tests:
-  - `tests/unit/test_factor_dsl_parser.py`
-  - `tests/unit/test_factor_constraints.py`
-  - `tests/unit/test_factor_originality.py`
-  - `tests/unit/test_factor_complexity.py`
-  - `tests/integration/test_feature3_factor_e2e.py`
+### Runtime Health
+- [x] `src/alpha_miner/pipelines/runtime_utils.py` now enforces strict agent-health validation.
 
-### Verification
-- [x] Full regression: `41 passed, 6 warnings`
-- [x] Feature 2 smoke (gate 0.10): `f2_smoke_gate10_20260223` -> gate passed, 3 hypotheses
-- [x] Feature 3 smoke: `f3_smoke_20260223` -> 10 candidates, validation artifacts generated
+### UI Redesign
+- [x] `ui/streamlit_app.py` refactored for readability and visual-first flow.
+- [x] JSON moved to debug expanders in monitor/library/viewer flows.
+- [x] Feature 2 preflight diagnostics added.
+
+### Test Additions/Updates
+- [x] `tests/unit/test_model_factory.py`
+- [x] `tests/unit/test_pipeline_runtime_utils.py`
+- [x] `tests/unit/test_ui_command_builder.py`
+- [x] `tests/integration/test_feature2_hypothesis_e2e.py`
 
 ---
 
@@ -72,76 +66,55 @@
 
 | Agent/Module | Progress | Blocker | Next Step |
 |--------------|----------|---------|-----------|
-| Feature 3 factor quality tuning | 60% | high rejection rate (7/10) | tune templates + thresholds after baseline backtesting integration |
-| Feature 4 backtesting loop | 0% | not started | design lightweight engine + metrics pipeline |
-| Feature 1 text stability | 70% | external provider misses | improve provider reliability and restore stricter gate |
+| Gemini live validation | 80% | local auth/network variability | run local Feature 2 smoke in gemini_with_search mode |
+| Deployment hardening | 40% | container/deploy runbooks not finalized | add Cloud Run deploy checklist and smoke report |
+| Observability polish | 70% | no centralized remote view | keep local run index; consider export layer later |
 
 ---
 
 ## 🚨 BLOCKERS & CRITICAL DECISIONS
 
-**[R007] Temporary gate override in effect** - MEDIUM  
-- Current default: `text_coverage_min=0.10`  
-- Original target: `>=0.20`  
-- Effect: enables Feature 2/3 progression while upstream text quality remains unstable.
-
-**[R008] Feature 3 accepted-factor yield is low at strict defaults** - MEDIUM  
-- Evidence: smoke run accepted `3/10` factors.
-- Effect: may limit downstream evaluation diversity without tuning.
+**[R021] Live Gemini+Search path depends on local ADC/network** - MEDIUM  
+- Code path implemented and fallback-safe.
+- Final sign-off requires local live command verification.
 
 ---
 
 ## 📋 NEXT ACTIONS (Priority Order)
 
-1. **[2h]** Implement Feature 4 backtesting skeleton (data loading, benchmark alignment, Sharpe/IR/IC/turnover).
-2. **[1h]** Add factor-library persistence and cross-run originality baseline for Feature 3.
-3. **[2h]** Improve Feature 1 provider resilience (SEC miss typing + optional fallback source) to restore gate to `>=0.20`.
-4. **[30m]** Re-run Feature 2 strict-gate smoke once text coverage improves.
+1. **[30-45m]** Run local Feature 2 live smoke with Gemini+Search.
+2. **[45-60m]** Capture UI screenshots for updated readability validation.
+3. **[2-3h]** Begin Cloud Run deployment hardening cycle.
 
 ---
 
 ## ⚠️ KNOWN ISSUES & TECH DEBT
 
-- **[I010]** Temporary gate override (`0.10`) must be reverted before final-quality demo.
-- **[I011]** Factor scoring currently deterministic heuristic; no backtest feedback loop yet.
-- **[I012]** No persistent factor library file yet for long-horizon originality tracking.
+- **[I018]** External provider variability (SEC/GDELT/RSS) remains.
+- **[I019]** ADK internals may still emit warnings; UI now classifies mismatch signals as hard health failures.
+- **[I017]** UI remains local-artifact based.
 
 ---
 
 ## 📦 KEY FILES (What to Review)
 
-### Gate + Feature 3 Core
 ```
+ui/streamlit_app.py
+src/alpha_miner/agents/hypothesis_generation/model_factory.py
+src/alpha_miner/agents/hypothesis_generation/role_agents.py
+src/alpha_miner/pipelines/runtime_utils.py
 configs/feature2_hypothesis.yaml
-src/alpha_miner/agents/hypothesis_generation/config_loader.py
-src/alpha_miner/agents/factor_construction/workflow.py
-src/alpha_miner/tools/factors/dsl_parser.py
-src/alpha_miner/tools/factors/scoring.py
-src/alpha_miner/pipelines/feature3_factor_cli.py
-```
-
-### Validation Reports
-```
-docs/validation/feature2_smoke_report_20260223_gate10.md
-docs/validation/feature3_smoke_report_20260223.md
+docs/runbooks/feature2_hypothesis.md
+docs/runbooks/ui_streamlit_console.md
+docs/validation/ui_gemini_connectivity_report_20260227.md
 ```
 
 ---
 
 ## 📊 QUICK METRICS
-- Total tests: `41 passed`
-- Feature 2 (temporary gate) smoke: `3 hypotheses`
-- Feature 3 smoke: `10 candidates`, `3 accepted`, `7 rejected`
-- Current gate policy: `0.10` (temporary)
-- Restore trigger: raise back to `>=0.20` once text pipeline stabilizes
+- Feature coverage: F1-F5 backend complete.
+- UI mode: executive-first summaries + visuals + debug-expanders.
+- New Feature 2 defaults: `model_policy=gemini_with_search`, `gemini_model=gemini-2.5-flash`.
+- Pending sign-off item: local live Gemini+Search smoke.
 
 ---
-
-## 🔗 IMPORTANT LINKS
-- Blueprint: `blueprint.md`
-- Context format reference: `context_md_example.md`
-- Feature 2 runbook: `docs/runbooks/feature2_hypothesis.md`
-- Feature 3 plan: `docs/feature_plans/feature3.md`
-- Feature 3 runbook: `docs/runbooks/feature3_factor.md`
-- Feature 2 temporary-gate validation: `docs/validation/feature2_smoke_report_20260223_gate10.md`
-- Feature 3 smoke validation: `docs/validation/feature3_smoke_report_20260223.md`
