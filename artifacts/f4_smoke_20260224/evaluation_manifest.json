@@ -1,0 +1,8 @@
+{
+  "run_id": "f4_smoke_20260224",
+  "ingestion_run_id": "f1_smoke_s2_postfix_20260223",
+  "factor_run_id": "f3_smoke_20260223",
+  "results_path": "artifacts/f4_smoke_20260224/evaluation_results.json",
+  "timeseries_path": "artifacts/f4_smoke_20260224/evaluation_metrics_timeseries.json",
+  "created_at": "2026-02-24T01:10:22.367896Z"
+}

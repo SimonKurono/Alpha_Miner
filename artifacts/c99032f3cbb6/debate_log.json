@@ -1,0 +1,14 @@
+{
+  "run_id": "c99032f3cbb6",
+  "rounds": [
+    {
+      "round_idx": 1,
+      "disagreements": [
+        "Horizon mismatch across role proposals",
+        "Direction mismatch across role proposals"
+      ],
+      "consensus_score": 0.76,
+      "stop_reason": "consensus_reached_0.76"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "run_id": "f3_strict_20260225",
+  "ingestion_run_id": "f1_strict_s2_20260225",
+  "hypothesis_run_id": "f2_strict_20260225",
+  "candidate_count": 10,
+  "accepted_count": 3,
+  "rejected_count": 7,
+  "candidates": [
+    {
+      "factor_id": "fct_001",
+      "expression": "Rank(returns_1d)",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_002",
+      "expression": "Rank(returns_5d)",
+      "source_hypothesis_id": "valuation_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_003",
+      "expression": "Normalize(volume)",
+      "source_hypothesis_id": "sentiment_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_004",
+      "expression": "Normalize(market_cap)",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_005",
+      "expression": "Rank(close)",
+      "source_hypothesis_id": "valuation_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_006",
+      "expression": "WinsorizedSum(Rank(returns_1d), Normalize(volume))",
+      "source_hypothesis_id": "sentiment_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_007",
+      "expression": "WinsorizedSum(Rank(returns_5d), Normalize(close))",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_008",
+      "expression": "Rank(returns_1d) + Normalize(volume)",
+      "source_hypothesis_id": "valuation_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_009",
+      "expression": "Rank(returns_5d) - Normalize(market_cap)",
+      "source_hypothesis_id": "sentiment_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_010",
+      "expression": "(Rank(close) * 0.5) + (Normalize(volume) * 0.5)",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 0,
+      "passed_constraints": false,
+      "reject_reasons": []
+    }
+  ],
+  "accepted": [
+    {
+      "factor_id": "fct_006",
+      "expression": "WinsorizedSum(Rank(returns_1d), Normalize(volume))",
+      "source_hypothesis_id": "sentiment_h1",
+      "alignment_score": 0.2,
+      "originality_score": 0.625,
+      "complexity_score": 13,
+      "passed_constraints": true,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_008",
+      "expression": "Rank(returns_1d) + Normalize(volume)",
+      "source_hypothesis_id": "valuation_h1",
+      "alignment_score": 0.25,
+      "originality_score": 0.21875,
+      "complexity_score": 12,
+      "passed_constraints": true,
+      "reject_reasons": []
+    },
+    {
+      "factor_id": "fct_009",
+      "expression": "Rank(returns_5d) - Normalize(market_cap)",
+      "source_hypothesis_id": "sentiment_h1",
+      "alignment_score": 0.1,
+      "originality_score": 0.21428571428571427,
+      "complexity_score": 12,
+      "passed_constraints": true,
+      "reject_reasons": []
+    }
+  ],
+  "rejected": [
+    {
+      "factor_id": "fct_001",
+      "expression": "Rank(returns_1d)",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.1,
+      "originality_score": 0.0,
+      "complexity_score": 5,
+      "passed_constraints": false,
+      "reject_reasons": [
+        "originality_below_min: 0.00 < 0.20"
+      ]
+    },
+    {
+      "factor_id": "fct_002",
+      "expression": "Rank(returns_5d)",
+      "source_hypothesis_id": "valuation_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.041666666666666664,
+      "complexity_score": 5,
+      "passed_constraints": false,
+      "reject_reasons": [
+        "originality_below_min: 0.04 < 0.20"
+      ]
+    },
+    {
+      "factor_id": "fct_003",
+      "expression": "Normalize(volume)",
+      "source_hypothesis_id": "sentiment_h1",
+      "alignment_score": 0.1,
+      "originality_score": 0.16,
+      "complexity_score": 5,
+      "passed_constraints": false,
+      "reject_reasons": [
+        "originality_below_min: 0.16 < 0.20"
+      ]
+    },
+    {
+      "factor_id": "fct_004",
+      "expression": "Normalize(market_cap)",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 5,
+      "passed_constraints": false,
+      "reject_reasons": [
+        "originality_below_min: 0.00 < 0.20"
+      ]
+    },
+    {
+      "factor_id": "fct_005",
+      "expression": "Rank(close)",
+      "source_hypothesis_id": "valuation_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.0,
+      "complexity_score": 5,
+      "passed_constraints": false,
+      "reject_reasons": [
+        "originality_below_min: 0.00 < 0.20"
+      ]
+    },
+    {
+      "factor_id": "fct_007",
+      "expression": "WinsorizedSum(Rank(returns_5d), Normalize(close))",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.1,
+      "originality_score": 0.078125,
+      "complexity_score": 13,
+      "passed_constraints": false,
+      "reject_reasons": [
+        "originality_below_min: 0.08 < 0.20"
+      ]
+    },
+    {
+      "factor_id": "fct_010",
+      "expression": "(Rank(close) * 0.5) + (Normalize(volume) * 0.5)",
+      "source_hypothesis_id": "fundamental_h1",
+      "alignment_score": 0.0,
+      "originality_score": 0.39436619718309857,
+      "complexity_score": 19,
+      "passed_constraints": false,
+      "reject_reasons": [
+        "complexity_exceeded: 19 > 16"
+      ]
+    }
+  ]
+}

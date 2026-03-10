@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "market_symbol_coverage": 1.0,
+  "text_symbol_coverage": 0.8,
+  "failures": [],
+  "warnings": []
+}

@@ -1,0 +1,18 @@
+{
+  "run_id": "2774f33552e2",
+  "market_path": "data/processed/ingestion/2774f33552e2/market_normalized.parquet",
+  "text_path": "data/processed/ingestion/2774f33552e2/text_normalized.parquet",
+  "quality_path": "artifacts/2774f33552e2/ingestion_quality.json",
+  "row_counts": {
+    "market": 2520,
+    "text": 31
+  },
+  "raw_artifacts": {
+    "stooq": "data/raw/ingestion/2774f33552e2/market_stooq.json",
+    "sec": "data/raw/ingestion/2774f33552e2/text_sec_filings.json",
+    "gdelt": "data/raw/ingestion/2774f33552e2/text_gdelt_news.json",
+    "rss": "data/raw/ingestion/2774f33552e2/text_rss_news.json",
+    "coverage_breakdown": "artifacts/2774f33552e2/text_coverage_breakdown.json"
+  },
+  "created_at": "2026-02-26T19:10:01.925147Z"
+}

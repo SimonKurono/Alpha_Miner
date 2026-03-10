@@ -1,0 +1,8 @@
+{
+  "run_id": "4c0898725313",
+  "ingestion_run_id": "f1_strict_s2_20260225",
+  "hypotheses_path": "artifacts/4c0898725313/hypotheses.json",
+  "debate_log_path": "artifacts/4c0898725313/debate_log.json",
+  "quality_gate_path": "artifacts/4c0898725313/hypothesis_quality_gate.json",
+  "created_at": "2026-02-26T08:03:23.600288Z"
+}

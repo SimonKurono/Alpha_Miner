@@ -1,0 +1,468 @@
+{
+  "generated_at": "2026-02-27T07:12:25.813631+00:00",
+  "runs": [
+    {
+      "run_id": "tmp_check_warn",
+      "stage": "feature2_hypothesis",
+      "status": "success",
+      "created_at": "2026-02-27T06:28:51.959490Z",
+      "manifest_path": "artifacts/tmp_check_warn/hypothesis_manifest.json",
+      "summary": {
+        "hypothesis_count": 3,
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0,
+        "model_providers": []
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_strict_s2_20260225",
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "2774f33552e2",
+      "stage": "feature1_ingestion",
+      "status": "success",
+      "created_at": "2026-02-26T19:10:01.925147Z",
+      "manifest_path": "artifacts/2774f33552e2/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "market_rows": 2520,
+        "text_rows": 31,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "LQD",
+      "stage": "feature1_ingestion",
+      "status": "success",
+      "created_at": "2026-02-26T19:09:55.032021Z",
+      "manifest_path": "artifacts/LQD/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "market_rows": 2520,
+        "text_rows": 31,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "c99032f3cbb6",
+      "stage": "feature2_hypothesis",
+      "status": "success",
+      "created_at": "2026-02-26T08:05:38.652455Z",
+      "manifest_path": "artifacts/c99032f3cbb6/hypothesis_manifest.json",
+      "summary": {
+        "hypothesis_count": 3,
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0,
+        "model_providers": []
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_strict_s2_20260225",
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "4c0898725313",
+      "stage": "feature2_hypothesis",
+      "status": "success",
+      "created_at": "2026-02-26T08:03:23.600288Z",
+      "manifest_path": "artifacts/4c0898725313/hypothesis_manifest.json",
+      "summary": {
+        "hypothesis_count": 3,
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0,
+        "model_providers": []
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_strict_s2_20260225",
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f5_strict_20260225",
+      "stage": "feature5_report",
+      "status": "success",
+      "created_at": "2026-02-25T21:32:12.807771Z",
+      "manifest_path": "artifacts/f5_strict_20260225/report_manifest.json",
+      "summary": {
+        "selected_factor_count": 1,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": "f4_strict_20260225"
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f4_strict_20260225",
+      "stage": "feature4_evaluation",
+      "status": "success",
+      "created_at": "2026-02-25T21:32:05.987972Z",
+      "manifest_path": "artifacts/f4_strict_20260225/evaluation_manifest.json",
+      "summary": {
+        "result_count": 10,
+        "promoted_count": 1,
+        "quality_passed": true
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_strict_s2_20260225",
+        "hypothesis_run_id": null,
+        "factor_run_id": "f3_strict_20260225",
+        "evaluation_run_id": "f4_strict_20260225"
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f3_strict_20260225",
+      "stage": "feature3_factor",
+      "status": "partial_success",
+      "created_at": "2026-02-25T21:31:57.200448Z",
+      "manifest_path": "artifacts/f3_strict_20260225/factor_manifest.json",
+      "summary": {
+        "candidate_count": 10,
+        "accepted_count": 3,
+        "rejected_count": 7,
+        "quality_passed": true
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_strict_s2_20260225",
+        "hypothesis_run_id": "f2_strict_20260225",
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f2_strict_20260225",
+      "stage": "feature2_hypothesis",
+      "status": "success",
+      "created_at": "2026-02-25T21:31:51.349951Z",
+      "manifest_path": "artifacts/f2_strict_20260225/hypothesis_manifest.json",
+      "summary": {
+        "hypothesis_count": 3,
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0,
+        "model_providers": []
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_strict_s2_20260225",
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f1_strict_s1_20260225",
+      "stage": "feature1_ingestion",
+      "status": "success",
+      "created_at": "2026-02-25T21:31:40.900340Z",
+      "manifest_path": "artifacts/f1_strict_s1_20260225/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "market_rows": 2520,
+        "text_rows": 31,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f1_strict_s2_20260225",
+      "stage": "feature1_ingestion",
+      "status": "success",
+      "created_at": "2026-02-25T20:32:45.881645Z",
+      "manifest_path": "artifacts/f1_strict_s2_20260225/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.8,
+        "market_rows": 12580,
+        "text_rows": 131,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f5_smoke_20260224",
+      "stage": "feature5_report",
+      "status": "success",
+      "created_at": "2026-02-24T01:43:33.636594Z",
+      "manifest_path": "artifacts/f5_smoke_20260224/report_manifest.json",
+      "summary": {
+        "selected_factor_count": 1,
+        "quality_passed": true,
+        "warnings_count": 0,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": "f4_smoke_20260224"
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f4_smoke_20260224",
+      "stage": "feature4_evaluation",
+      "status": "success",
+      "created_at": "2026-02-24T01:10:22.367896Z",
+      "manifest_path": "artifacts/f4_smoke_20260224/evaluation_manifest.json",
+      "summary": {
+        "result_count": 10,
+        "promoted_count": 1,
+        "quality_passed": true
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_smoke_s2_postfix_20260223",
+        "hypothesis_run_id": null,
+        "factor_run_id": "f3_smoke_20260223",
+        "evaluation_run_id": "f4_smoke_20260224"
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f3_smoke_20260223",
+      "stage": "feature3_factor",
+      "status": "partial_success",
+      "created_at": "2026-02-23T23:53:46.467833Z",
+      "manifest_path": "artifacts/f3_smoke_20260223/factor_manifest.json",
+      "summary": {
+        "candidate_count": 10,
+        "accepted_count": 3,
+        "rejected_count": 7,
+        "quality_passed": true
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_smoke_s2_postfix_20260223",
+        "hypothesis_run_id": "f2_smoke_gate10_20260223",
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f2_smoke_gate10_20260223",
+      "stage": "feature2_hypothesis",
+      "status": "partial_success",
+      "created_at": "2026-02-23T23:53:38.990625Z",
+      "manifest_path": "artifacts/f2_smoke_gate10_20260223/hypothesis_manifest.json",
+      "summary": {
+        "hypothesis_count": 3,
+        "market_coverage": 1.0,
+        "text_coverage": 0.1,
+        "quality_passed": true,
+        "warnings_count": 1,
+        "failures_count": 0,
+        "model_providers": []
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_smoke_s2_postfix_20260223",
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f2_smoke_postfix_20260223",
+      "stage": "feature2_hypothesis",
+      "status": "failed",
+      "created_at": "2026-02-23T20:59:09.380415Z",
+      "manifest_path": "artifacts/f2_smoke_postfix_20260223/hypothesis_manifest.json",
+      "summary": {
+        "hypothesis_count": 0,
+        "market_coverage": 1.0,
+        "text_coverage": 0.1,
+        "quality_passed": false,
+        "warnings_count": 1,
+        "failures_count": 1,
+        "model_providers": []
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_smoke_s2_postfix_20260223",
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 1
+    },
+    {
+      "run_id": "f1_smoke_s2_postfix_20260223",
+      "stage": "feature1_ingestion",
+      "status": "partial_success",
+      "created_at": "2026-02-23T20:59:01.598170Z",
+      "manifest_path": "artifacts/f1_smoke_s2_postfix_20260223/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.1,
+        "market_rows": 12580,
+        "text_rows": 20,
+        "quality_passed": true,
+        "warnings_count": 1,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f1_smoke_s1_postfix_20260223",
+      "stage": "feature1_ingestion",
+      "status": "partial_success",
+      "created_at": "2026-02-23T20:54:53.903777Z",
+      "manifest_path": "artifacts/f1_smoke_s1_postfix_20260223/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.1,
+        "market_rows": 2520,
+        "text_rows": 4,
+        "quality_passed": true,
+        "warnings_count": 1,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f2_cli_gatecheck_20260223",
+      "stage": "feature2_hypothesis",
+      "status": "failed",
+      "created_at": "2026-02-23T20:38:39.327142Z",
+      "manifest_path": "artifacts/f2_cli_gatecheck_20260223/hypothesis_manifest.json",
+      "summary": {
+        "hypothesis_count": 0,
+        "market_coverage": 1.0,
+        "text_coverage": 0.1,
+        "quality_passed": false,
+        "warnings_count": 1,
+        "failures_count": 1,
+        "model_providers": []
+      },
+      "lineage": {
+        "ingestion_run_id": "f1_smoke_s1_postfix_20260223",
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 1
+    },
+    {
+      "run_id": "f1_smoke_s2_20260221",
+      "stage": "feature1_ingestion",
+      "status": "partial_success",
+      "created_at": "2026-02-21T14:18:27.330834Z",
+      "manifest_path": "artifacts/f1_smoke_s2_20260221/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.0,
+        "market_rows": 12580,
+        "text_rows": 0,
+        "quality_passed": true,
+        "warnings_count": 2,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    },
+    {
+      "run_id": "f1_smoke_s1_20260221",
+      "stage": "feature1_ingestion",
+      "status": "partial_success",
+      "created_at": "2026-02-21T14:07:13.299068Z",
+      "manifest_path": "artifacts/f1_smoke_s1_20260221/ingestion_manifest.json",
+      "summary": {
+        "market_coverage": 1.0,
+        "text_coverage": 0.0,
+        "market_rows": 2520,
+        "text_rows": 0,
+        "quality_passed": true,
+        "warnings_count": 2,
+        "failures_count": 0
+      },
+      "lineage": {
+        "ingestion_run_id": null,
+        "hypothesis_run_id": null,
+        "factor_run_id": null,
+        "evaluation_run_id": null
+      },
+      "errors_count": 0
+    }
+  ]
+}

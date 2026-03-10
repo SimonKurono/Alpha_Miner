@@ -1,0 +1,165 @@
+{
+  "symbols_total": 10,
+  "symbols_with_any_text": 8,
+  "symbol_rows": [
+    {
+      "symbol": "AAPL",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "META",
+      "sec_docs": 3,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 3,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "JPM",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing",
+        "no_text_docs"
+      ]
+    },
+    {
+      "symbol": "XOM",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "UNH",
+      "sec_docs": 4,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 4,
+      "has_text": true,
+      "missing_reasons": [
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing"
+      ]
+    },
+    {
+      "symbol": "BRK.B",
+      "sec_docs": 0,
+      "gdelt_docs": 0,
+      "rss_docs": 0,
+      "total_docs": 0,
+      "has_text": false,
+      "missing_reasons": [
+        "sec_missing",
+        "gdelt_missing",
+        "gdelt_rate_limited",
+        "rss_missing",
+        "no_text_docs"
+      ]
+    }
+  ],
+  "top_missing_reasons": {
+    "gdelt_missing": 10,
+    "gdelt_rate_limited": 10,
+    "rss_missing": 10,
+    "no_text_docs": 2,
+    "sec_missing": 1
+  },
+  "source_totals": {
+    "sec_docs": 31,
+    "gdelt_docs": 0,
+    "rss_docs": 0
+  },
+  "provider_metadata": {
+    "gdelt": {
+      "rate_limited": true,
+      "deadline_reached": false,
+      "requested_symbols": 10,
+      "document_count": 0
+    },
+    "rss": {
+      "deadline_reached": false,
+      "requested_symbols": 10,
+      "document_count": 0
+    }
+  },
+  "run_id": "f1_strict_s1_20260225"
+}

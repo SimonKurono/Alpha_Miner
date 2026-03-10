@@ -1,0 +1,18 @@
+{
+  "run_id": "f1_strict_s2_20260225",
+  "market_path": "data/processed/ingestion/f1_strict_s2_20260225/market_normalized.jsonl",
+  "text_path": "data/processed/ingestion/f1_strict_s2_20260225/text_normalized.jsonl",
+  "quality_path": "artifacts/f1_strict_s2_20260225/ingestion_quality.json",
+  "row_counts": {
+    "market": 12580,
+    "text": 131
+  },
+  "raw_artifacts": {
+    "stooq": "data/raw/ingestion/f1_strict_s2_20260225/market_stooq.json",
+    "sec": "data/raw/ingestion/f1_strict_s2_20260225/text_sec_filings.json",
+    "gdelt": "data/raw/ingestion/f1_strict_s2_20260225/text_gdelt_news.json",
+    "rss": "data/raw/ingestion/f1_strict_s2_20260225/text_rss_news.json",
+    "coverage_breakdown": "artifacts/f1_strict_s2_20260225/text_coverage_breakdown.json"
+  },
+  "created_at": "2026-02-25T20:32:45.881645Z"
+}

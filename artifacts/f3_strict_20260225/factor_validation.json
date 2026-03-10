@@ -1,0 +1,194 @@
+{
+  "run_id": "f3_strict_20260225",
+  "rows": [
+    {
+      "factor_id": "fct_001",
+      "expression": "Rank(returns_1d)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_002",
+      "expression": "Rank(returns_5d)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_003",
+      "expression": "Normalize(volume)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_004",
+      "expression": "Normalize(market_cap)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_005",
+      "expression": "Rank(close)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_006",
+      "expression": "WinsorizedSum(Rank(returns_1d), Normalize(volume))",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_007",
+      "expression": "WinsorizedSum(Rank(returns_5d), Normalize(close))",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_008",
+      "expression": "Rank(returns_1d) + Normalize(volume)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_009",
+      "expression": "Rank(returns_5d) - Normalize(market_cap)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_010",
+      "expression": "(Rank(close) * 0.5) + (Normalize(volume) * 0.5)",
+      "passed": true,
+      "errors": [],
+      "stage": "dsl_validation"
+    },
+    {
+      "factor_id": "fct_001",
+      "expression": "Rank(returns_1d)",
+      "passed": false,
+      "errors": [
+        "originality_below_min: 0.00 < 0.20"
+      ],
+      "stage": "originality_complexity",
+      "complexity_score": 5,
+      "originality_score": 0.0,
+      "alignment_score": 0.1
+    },
+    {
+      "factor_id": "fct_002",
+      "expression": "Rank(returns_5d)",
+      "passed": false,
+      "errors": [
+        "originality_below_min: 0.04 < 0.20"
+      ],
+      "stage": "originality_complexity",
+      "complexity_score": 5,
+      "originality_score": 0.041666666666666664,
+      "alignment_score": 0.0
+    },
+    {
+      "factor_id": "fct_003",
+      "expression": "Normalize(volume)",
+      "passed": false,
+      "errors": [
+        "originality_below_min: 0.16 < 0.20"
+      ],
+      "stage": "originality_complexity",
+      "complexity_score": 5,
+      "originality_score": 0.16,
+      "alignment_score": 0.1
+    },
+    {
+      "factor_id": "fct_004",
+      "expression": "Normalize(market_cap)",
+      "passed": false,
+      "errors": [
+        "originality_below_min: 0.00 < 0.20"
+      ],
+      "stage": "originality_complexity",
+      "complexity_score": 5,
+      "originality_score": 0.0,
+      "alignment_score": 0.0
+    },
+    {
+      "factor_id": "fct_005",
+      "expression": "Rank(close)",
+      "passed": false,
+      "errors": [
+        "originality_below_min: 0.00 < 0.20"
+      ],
+      "stage": "originality_complexity",
+      "complexity_score": 5,
+      "originality_score": 0.0,
+      "alignment_score": 0.0
+    },
+    {
+      "factor_id": "fct_006",
+      "expression": "WinsorizedSum(Rank(returns_1d), Normalize(volume))",
+      "passed": true,
+      "errors": [],
+      "stage": "originality_complexity",
+      "complexity_score": 13,
+      "originality_score": 0.625,
+      "alignment_score": 0.2
+    },
+    {
+      "factor_id": "fct_007",
+      "expression": "WinsorizedSum(Rank(returns_5d), Normalize(close))",
+      "passed": false,
+      "errors": [
+        "originality_below_min: 0.08 < 0.20"
+      ],
+      "stage": "originality_complexity",
+      "complexity_score": 13,
+      "originality_score": 0.078125,
+      "alignment_score": 0.1
+    },
+    {
+      "factor_id": "fct_008",
+      "expression": "Rank(returns_1d) + Normalize(volume)",
+      "passed": true,
+      "errors": [],
+      "stage": "originality_complexity",
+      "complexity_score": 12,
+      "originality_score": 0.21875,
+      "alignment_score": 0.25
+    },
+    {
+      "factor_id": "fct_009",
+      "expression": "Rank(returns_5d) - Normalize(market_cap)",
+      "passed": true,
+      "errors": [],
+      "stage": "originality_complexity",
+      "complexity_score": 12,
+      "originality_score": 0.21428571428571427,
+      "alignment_score": 0.1
+    },
+    {
+      "factor_id": "fct_010",
+      "expression": "(Rank(close) * 0.5) + (Normalize(volume) * 0.5)",
+      "passed": false,
+      "errors": [
+        "complexity_exceeded: 19 > 16"
+      ],
+      "stage": "originality_complexity",
+      "complexity_score": 19,
+      "originality_score": 0.39436619718309857,
+      "alignment_score": 0.0
+    }
+  ],
+  "summary": {
+    "candidate_count": 10,
+    "accepted_count": 3,
+    "rejected_count": 7
+  }
+}

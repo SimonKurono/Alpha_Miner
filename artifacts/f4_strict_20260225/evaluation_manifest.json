@@ -1,0 +1,8 @@
+{
+  "run_id": "f4_strict_20260225",
+  "ingestion_run_id": "f1_strict_s2_20260225",
+  "factor_run_id": "f3_strict_20260225",
+  "results_path": "artifacts/f4_strict_20260225/evaluation_results.json",
+  "timeseries_path": "artifacts/f4_strict_20260225/evaluation_metrics_timeseries.json",
+  "created_at": "2026-02-25T21:32:05.987972Z"
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "tmp_check_warn",
+  "rounds": [
+    {
+      "round_idx": 1,
+      "disagreements": [
+        "Horizon mismatch across role proposals",
+        "Direction mismatch across role proposals"
+      ],
+      "consensus_score": 0.76,
+      "stop_reason": "consensus_reached_0.76"
+    }
+  ]
+}

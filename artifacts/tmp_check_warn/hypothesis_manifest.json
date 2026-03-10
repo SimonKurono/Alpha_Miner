@@ -1,0 +1,8 @@
+{
+  "run_id": "tmp_check_warn",
+  "ingestion_run_id": "f1_strict_s2_20260225",
+  "hypotheses_path": "artifacts/tmp_check_warn/hypotheses.json",
+  "debate_log_path": "artifacts/tmp_check_warn/debate_log.json",
+  "quality_gate_path": "artifacts/tmp_check_warn/hypothesis_quality_gate.json",
+  "created_at": "2026-02-27T06:28:51.959490Z"
+}

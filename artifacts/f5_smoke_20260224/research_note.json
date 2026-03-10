@@ -1,0 +1,47 @@
+{
+  "run_id": "f5_smoke_20260224",
+  "title": "Alpha Miner Research Note",
+  "as_of_date": "2026-02-24",
+  "executive_summary": "Evaluation run `f4_smoke_20260224` produced 10 factor result(s); 1 met promotion thresholds. Report includes 1 selected factor(s). Selected 1 promoted factor(s) from evaluation results for reporting.",
+  "methodology": "Factors were evaluated in Feature 4 using deterministic score computation, weekly-rebalanced long-short portfolio construction, 10 bps turnover-based transaction costs, rolling out-of-sample robustness checks, and decay diagnostics.",
+  "selected_factors": [
+    {
+      "factor_id": "fct_003",
+      "expression": "Normalize(volume)",
+      "promoted": true,
+      "sharpe": 0.9544983346048596,
+      "information_ratio": 0.9544983346048596,
+      "ic_mean": 0.0576105886450714,
+      "turnover_monthly_max": 0.5,
+      "oos_score": 0.7660530489259747,
+      "decay_score": 1.0,
+      "composite_score": 0.7989823744505972,
+      "reject_reasons": [],
+      "risk_tags": []
+    }
+  ],
+  "key_risks": [
+    "Prototype pipeline currently uses temporary text coverage gate (0.10) pending upstream stability restoration.",
+    "Backtest results are historical simulations and can be sensitive to universe, costs, and data quality assumptions."
+  ],
+  "disclaimer": "Alpha Miner is an educational and research tool only. This output is not financial advice and should not be used as a sole basis for investment decisions.",
+  "appendix_metrics": {
+    "lineage": {
+      "ingestion_run_id": "f1_smoke_s2_postfix_20260223",
+      "factor_run_id": "f3_smoke_20260223",
+      "evaluation_run_id": "f4_smoke_20260224",
+      "hypothesis_run_id": null
+    },
+    "selection": {
+      "policy": "promoted_plus_top_fallback",
+      "fallback_used": false,
+      "source_result_count": 10,
+      "selected_count": 1,
+      "promoted_source_count": 1
+    },
+    "selected_factor_ids": [
+      "fct_003"
+    ],
+    "promoted_selected_count": 1
+  }
+}
