@@ -123,6 +123,7 @@ class NewsResponse(BaseModel):
     documents: list[NewsDocument] = Field(default_factory=list)
     missing_symbols: list[str] = Field(default_factory=list)
     source: str = "gdelt"
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 class ErrorEvent(BaseModel):
