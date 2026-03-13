@@ -18,9 +18,11 @@ def load_feature2_config(config_path: str = DEFAULT_CONFIG_PATH) -> dict[str, An
                 "target_hypothesis_count": 3,
                 "max_runtime_sec": 300,
                 "risk_profile": "risk_neutral",
-                "text_coverage_min": 0.10,
-                "model_policy": "claude_with_fallback",
+                "text_coverage_min": 0.20,
+                "model_policy": "gemini_with_search",
                 "primary_model": "claude-3-5-sonnet-v2@20241022",
+                "gemini_model": "gemini-2.5-flash",
+                "enable_google_search_tool": True,
                 "max_debate_rounds": 2,
             }
         }
