@@ -21,6 +21,7 @@ class HypothesisPublisherAgent(StatefulCustomAgent):
         gate_payload = dict(ctx.session.state.get("hypothesis.gate", {}))
         hypotheses_payload = list(ctx.session.state.get("hypothesis.final", []))
         debate_payload = list(ctx.session.state.get("hypothesis.debate.rounds", []))
+        model_trace_payload = list(ctx.session.state.get("hypothesis.model_trace", []))
 
         gate_path = write_json(
             f"artifacts/{run_config.run_id}/hypothesis_quality_gate.json",
@@ -41,6 +42,13 @@ class HypothesisPublisherAgent(StatefulCustomAgent):
                 "rounds": debate_payload,
             },
         )
+        model_trace_path = write_json(
+            f"artifacts/{run_config.run_id}/model_trace.json",
+            {
+                "run_id": run_config.run_id,
+                "trace": model_trace_payload,
+            },
+        )
 
         manifest = HypothesisManifest(
             run_id=run_config.run_id,
@@ -48,6 +56,7 @@ class HypothesisPublisherAgent(StatefulCustomAgent):
             hypotheses_path=hypotheses_path,
             debate_log_path=debate_path,
             quality_gate_path=gate_path,
+            model_trace_path=model_trace_path,
         )
         manifest_path = write_json(
             f"artifacts/{run_config.run_id}/hypothesis_manifest.json",
