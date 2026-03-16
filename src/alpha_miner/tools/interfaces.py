@@ -18,7 +18,6 @@ from alpha_miner.agents.data_ingestion.schemas import (
 from alpha_miner.tools.macro.fred_provider import fetch_fred_series
 from alpha_miner.tools.market.stooq_provider import fetch_stooq_prices
 from alpha_miner.tools.text.gdelt_provider import fetch_gdelt_news
-from alpha_miner.tools.text.rss_provider import fetch_rss_news
 from alpha_miner.tools.text.sec_provider import fetch_latest_shares_outstanding, fetch_sec_filings
 from alpha_miner.tools.validators.ingestion_quality import validate_ingestion_outputs
 
@@ -95,7 +94,6 @@ __all__ = [
     "fetch_fred_series",
     "fetch_sec_filings",
     "fetch_gdelt_news",
-    "fetch_rss_news",
     "fetch_latest_shares_outstanding",
     "derive_market_features",
     "validate_ingestion_outputs",

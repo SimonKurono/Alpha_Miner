@@ -1,8 +1,0 @@
-defaults:
-  benchmark: SPY
-  rebalance_freq: weekly
-  train_window_days: 252
-  test_window_days: 63
-  transaction_cost_bps: 10.0
-  promotion_profile: moderate
-  max_runtime_sec: 300

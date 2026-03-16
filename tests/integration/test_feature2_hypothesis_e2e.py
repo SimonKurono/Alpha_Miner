@@ -138,27 +138,3 @@ def test_feature2_e2e_hard_gate_failure(tmp_path, monkeypatch):
 
     assert state["run.meta"]["status"] == "failed"
     assert any("Text symbol coverage below minimum" in failure for failure in state["hypothesis.gate"]["failures"])
-
-
-def test_feature2_e2e_gemini_policy_fallback(tmp_path, monkeypatch):
-    monkeypatch.chdir(tmp_path)
-    monkeypatch.delenv("GOOGLE_CLOUD_PROJECT", raising=False)
-    monkeypatch.delenv("GOOGLE_CLOUD_LOCATION", raising=False)
-    _seed_feature1_artifacts(tmp_path, ingestion_run_id="ing_gemini_fb", text_coverage=0.30)
-
-    state = _run_feature2(
-        {
-            "run_id": "f2_test_gemini_fallback",
-            "ingestion_run_id": "ing_gemini_fb",
-            "model_policy": "gemini_with_search",
-            "gemini_model": "gemini-2.5-flash",
-            "enable_google_search_tool": True,
-        }
-    )
-
-    assert state["run.meta"]["status"] in {"success", "partial_success"}
-    assert len(state.get("hypothesis.final", [])) == 3
-    assert any(
-        row.get("error_type") == "model_fallback"
-        for row in state.get("errors.hypothesis", [])
-    )

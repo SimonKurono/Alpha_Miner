@@ -1,22 +1,19 @@
 # Runbook: Feature 2 Hypothesis Generation
 
 ## Preconditions
-1. Feature 1 ingestion artifacts exist under `artifacts/<ingestion_run_id>/`.
-2. Strict baseline gate remains `text_coverage_min=0.20`.
-3. For Gemini path: `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_LOCATION`, ADC configured.
-4. For Claude path: `anthropic` package installed and Vertex ADC configured.
+1. Feature 1 ingestion run artifacts exist under `artifacts/<ingestion_run_id>/`.
+2. Python env includes `google-adk`.
+3. For Claude path: `anthropic` package installed and Vertex ADC configured.
+4. Temporary prototype override: default `text_coverage_min` is set to `0.10` (lowered from `0.20`) to unblock Feature 3 while external text providers are unstable.
 
-## Standard Run (Gemini + Google Search)
+## Standard Run
 ```bash
 PYTHONPATH=src python3 -m alpha_miner.pipelines.feature2_hypothesis_cli \
   --ingestion-run-id <feature1_run_id> \
-  --run-id <feature2_run_id> \
-  --model-policy gemini_with_search \
-  --gemini-model gemini-2.5-flash \
-  --enable-google-search-tool
+  --run-id <feature2_run_id>
 ```
 
-## Deterministic Run
+## Deterministic Mode (No Claude Dependency)
 ```bash
 PYTHONPATH=src python3 -m alpha_miner.pipelines.feature2_hypothesis_cli \
   --ingestion-run-id <feature1_run_id> \
@@ -24,37 +21,17 @@ PYTHONPATH=src python3 -m alpha_miner.pipelines.feature2_hypothesis_cli \
   --model-policy deterministic_only
 ```
 
-## Strict Gemini Run (No Fallback)
-```bash
-PYTHONPATH=src python3 -m alpha_miner.pipelines.feature2_hypothesis_cli \
-  --ingestion-run-id <feature1_run_id> \
-  --run-id <feature2_run_id> \
-  --model-policy gemini_only \
-  --gemini-model gemini-2.5-flash \
-  --enable-google-search-tool
-```
-
 ## Output Artifacts
-1. `artifacts/<run_id>/hypothesis_quality_gate.json`
-2. `artifacts/<run_id>/hypotheses.json`
-3. `artifacts/<run_id>/debate_log.json`
-4. `artifacts/<run_id>/model_trace.json`
-5. `artifacts/<run_id>/hypothesis_manifest.json`
-
-## Model Policy Semantics
-1. `gemini_with_search`: Gemini+Search first; deterministic fallback on failure.
-2. `gemini_only`: Gemini+Search required; fail on generation/backend failure.
-3. `claude_with_fallback`: Claude first; deterministic fallback on failure.
-4. `claude_only`: Claude required; fail on generation/backend failure.
-5. `deterministic_only`: No LLM call.
+- `artifacts/<run_id>/hypothesis_quality_gate.json`
+- `artifacts/<run_id>/hypotheses.json`
+- `artifacts/<run_id>/debate_log.json`
+- `artifacts/<run_id>/hypothesis_manifest.json`
 
 ## Triage
-1. `readiness_gate_failed`:
-   - Check `artifacts/<ingestion_run_id>/ingestion_quality.json`.
-2. `model_fallback`:
-   - Inspect `model_trace.json` and verify env/auth/model availability.
-3. `gemini_generation_failed` / `gemini_only` failure:
-   - Verify ADC and Vertex project/location settings.
-4. `missing_or_invalid_artifact`:
-   - Confirm manifest/table paths from Feature 1 still exist.
+- If `readiness_gate_failed`: inspect `artifacts/<ingestion_run_id>/ingestion_quality.json`.
+- If `missing_or_invalid_artifact`: confirm manifest and table paths still exist.
+- If `claude_generation_failed`: switch to `--model-policy deterministic_only` and retry.
 
+## Temporary Policy + Restore Trigger
+- Current default gate: `text_coverage_min=0.10` (prototype override).
+- Restore target: raise back to `>=0.20` once Feature 1 achieves stable text coverage on canonical smoke runs.

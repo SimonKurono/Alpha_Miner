@@ -6,10 +6,10 @@ import argparse
 import asyncio
 import json
 
+from google.adk.runners import InMemoryRunner
 from google.genai import types
 
 from alpha_miner.agents.factor_construction.workflow import build_root_factor_workflow
-from alpha_miner.pipelines.runtime_utils import build_runner
 
 
 def _parse_args() -> argparse.Namespace:
@@ -29,7 +29,7 @@ def _parse_args() -> argparse.Namespace:
 
 async def _run(args: argparse.Namespace) -> int:
     root_agent = build_root_factor_workflow(config_path=args.config)
-    runner = build_runner(root_agent, fallback_app_name="alpha_miner_feature3")
+    runner = InMemoryRunner(agent=root_agent, app_name="alpha_miner_feature3")
 
     try:
         session = await runner.session_service.create_session(
