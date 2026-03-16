@@ -17,8 +17,16 @@ class Feature2RunConfig(BaseModel):
     max_runtime_sec: int = Field(default=300, ge=60, le=900)
     risk_profile: Literal["risk_averse", "risk_neutral"] = "risk_neutral"
     text_coverage_min: float = Field(default=0.20, ge=0.0, le=1.0)
-    model_policy: Literal["claude_with_fallback", "claude_only", "deterministic_only"] = "claude_with_fallback"
+    model_policy: Literal[
+        "claude_with_fallback",
+        "claude_only",
+        "deterministic_only",
+        "gemini_with_search",
+        "gemini_only",
+    ] = "claude_with_fallback"
     primary_model: str = "claude-3-5-sonnet-v2@20241022"
+    gemini_model: str = "gemini-2.5-flash"
+    enable_google_search_tool: bool = True
     max_debate_rounds: int = Field(default=2, ge=1, le=5)
 
 
@@ -74,6 +82,7 @@ class HypothesisManifest(BaseModel):
     hypotheses_path: str
     debate_log_path: str
     quality_gate_path: str
+    model_trace_path: str | None = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -96,6 +105,7 @@ class StateNamespace(BaseModel):
     inputs_ingestion_manifest: dict[str, Any]
     inputs_ingestion_quality: dict[str, Any]
     hypothesis_role_outputs: dict[str, list[dict[str, Any]]] = Field(default_factory=dict)
+    hypothesis_model_trace: list[dict[str, Any]] = Field(default_factory=list)
     hypothesis_debate_rounds: list[dict[str, Any]] = Field(default_factory=list)
     hypothesis_final: list[dict[str, Any]] = Field(default_factory=list)
     artifacts_hypothesis_manifest: Optional[str] = None
