@@ -46,8 +46,12 @@ class HypothesisRunConfigAgent(StatefulCustomAgent):
             max_runtime_sec=int(request.get("max_runtime_sec", defaults.get("max_runtime_sec", 300))),
             risk_profile=str(request.get("risk_profile", defaults.get("risk_profile", "risk_neutral"))),
             text_coverage_min=float(request.get("text_coverage_min", defaults.get("text_coverage_min", 0.20))),
-            model_policy=str(request.get("model_policy", defaults.get("model_policy", "claude_with_fallback"))),
+            model_policy=str(request.get("model_policy", defaults.get("model_policy", "gemini_with_search"))),
             primary_model=str(request.get("primary_model", defaults.get("primary_model", "claude-3-5-sonnet-v2@20241022"))),
+            gemini_model=str(request.get("gemini_model", defaults.get("gemini_model", "gemini-2.5-flash"))),
+            enable_google_search_tool=bool(
+                request.get("enable_google_search_tool", defaults.get("enable_google_search_tool", True))
+            ),
             max_debate_rounds=int(request.get("max_debate_rounds", defaults.get("max_debate_rounds", 2))),
         )
 
@@ -57,6 +61,7 @@ class HypothesisRunConfigAgent(StatefulCustomAgent):
             "run.config": run_config.model_dump(mode="json"),
             "run.meta": run_meta.model_dump(mode="json"),
             "errors.hypothesis": errors,
+            "hypothesis.model_trace": [],
             "run.control.stop": run_stop,
         }
         yield self._state_event(
