@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Literal
+from typing import Any, Literal
 
 from google.adk.agents.invocation_context import InvocationContext
 
@@ -132,7 +132,16 @@ class RoleHypothesisAgent(StatefulCustomAgent):
 
         errors = list(ctx.session.state.get("errors.hypothesis", []))
         role_output_key = f"hypothesis.role_outputs.{self.role_name}"
+        model_trace_key = "hypothesis.model_trace"
         candidates: list[HypothesisCandidate] = []
+        role_model_trace: dict[str, Any] = {
+            "role": self.role_name,
+            "provider": "deterministic",
+            "model": "deterministic",
+            "google_search_tool_enabled": False,
+            "attempts": 0,
+            "fallback_used": False,
+        }
 
         if is_runtime_exceeded(run_meta):
             errors = append_budget_exceeded_error(
@@ -154,6 +163,8 @@ class RoleHypothesisAgent(StatefulCustomAgent):
         backend = create_model_backend(
             model_policy=run_config.model_policy,
             primary_model=run_config.primary_model,
+            gemini_model=run_config.gemini_model,
+            enable_google_search_tool=run_config.enable_google_search_tool,
         )
         if backend.warning:
             errors.append(
@@ -164,18 +175,28 @@ class RoleHypothesisAgent(StatefulCustomAgent):
                     is_fatal=False,
                 ).model_dump(mode="json")
             )
+            role_model_trace["fallback_used"] = True
+            role_model_trace["warning"] = backend.warning
+        role_model_trace["provider"] = backend.mode
+        role_model_trace["model"] = (
+            run_config.gemini_model if backend.mode == "gemini" else run_config.primary_model
+        )
+        role_model_trace["google_search_tool_enabled"] = bool(
+            backend.mode == "gemini" and run_config.enable_google_search_tool
+        )
 
-        if backend.mode == "claude" and get_runtime_remaining_sec(run_meta) >= self.min_llm_remaining_sec:
+        if backend.mode in {"claude", "gemini"} and get_runtime_remaining_sec(run_meta) >= self.min_llm_remaining_sec:
             try:
                 prompt = _role_prompt(self.role_name, snapshot=snapshot, risk_profile=run_config.risk_profile)
-                raw = backend.generate_text(prompt)
+                raw, generated_trace = backend.generate_text(prompt)
+                role_model_trace.update(generated_trace)
                 candidates = _parse_model_candidates(self.role_name, raw)
             except Exception as exc:  # noqa: BLE001
-                if run_config.model_policy == "claude_only":
+                if run_config.model_policy in {"claude_only", "gemini_only"}:
                     errors.append(
                         ErrorEvent(
                             source=self.role_name,
-                            error_type="claude_generation_failed",
+                            error_type=f"{backend.mode}_generation_failed",
                             message=str(exc),
                             is_fatal=True,
                         ).model_dump(mode="json")
@@ -186,22 +207,28 @@ class RoleHypothesisAgent(StatefulCustomAgent):
                             "errors.hypothesis": errors,
                             role_output_key: [],
                             "run.control.stop": True,
+                            model_trace_key: list(ctx.session.state.get(model_trace_key, [])) + [role_model_trace],
                         },
-                        text=f"{self.name} failed in claude_only mode: {exc}",
+                        text=f"{self.name} failed in strict {backend.mode} mode: {exc}",
                     )
                     return
 
                 errors.append(
                     ErrorEvent(
                         source=self.role_name,
-                        error_type="claude_generation_failed_fallback",
+                        error_type=f"{backend.mode}_generation_failed_fallback",
                         message=str(exc),
                         is_fatal=False,
                     ).model_dump(mode="json")
                 )
+                role_model_trace["fallback_used"] = True
+                role_model_trace["error"] = str(exc)
 
         if not candidates:
             candidates = [_deterministic_candidate(self.role_name, snapshot=snapshot, risk_profile=run_config.risk_profile)]
+            if backend.mode == "deterministic":
+                role_model_trace["provider"] = "deterministic"
+                role_model_trace["model"] = "deterministic"
 
         scored: list[dict] = []
         for candidate in candidates:
@@ -213,6 +240,7 @@ class RoleHypothesisAgent(StatefulCustomAgent):
             {
                 role_output_key: scored,
                 "errors.hypothesis": errors,
+                model_trace_key: list(ctx.session.state.get(model_trace_key, [])) + [role_model_trace],
             },
             text=f"{self.name} produced {len(scored)} candidate(s)",
         )
