@@ -19,6 +19,11 @@ providers:
     news:
       primary: gdelt
       max_docs_per_symbol: 50
+      fallback:
+        enabled: true
+        provider: rss
+        max_docs_per_symbol: 20
+        min_remaining_sec: 15
 
 universe:
   name: sp100_prototype

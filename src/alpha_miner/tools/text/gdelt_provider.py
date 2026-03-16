@@ -95,12 +95,15 @@ def _dedupe_news_documents(docs: list[NewsDocument]) -> list[NewsDocument]:
 def fetch_gdelt_news(req: NewsRequest, deadline: datetime | None = None) -> NewsResponse:
     all_docs: list[NewsDocument] = []
     missing_symbols: list[str] = []
+    rate_limited = False
+    deadline_reached = False
 
     for idx, symbol in enumerate(req.symbols):
         if deadline and datetime.now(timezone.utc) >= deadline:
             # Stop early to preserve runtime budget for the overall run.
             missing_symbols.extend(req.symbols[idx:])
             logger.warning("GDELT deadline reached at %s; skipping %d symbols", symbol, len(req.symbols[idx:]))
+            deadline_reached = True
             break
 
         timeout = DEFAULT_TIMEOUT
@@ -115,6 +118,7 @@ def fetch_gdelt_news(req: NewsRequest, deadline: datetime | None = None) -> News
             remaining_symbols = req.symbols[idx:]
             missing_symbols.extend(remaining_symbols)
             logger.warning("GDELT rate-limited at %s; skipping %d symbols: %s", symbol, len(remaining_symbols), exc)
+            rate_limited = True
             break
         except Exception as exc:  # noqa: BLE001
             logger.warning("GDELT fetch failed for %s: %s", symbol, exc)
@@ -152,4 +156,14 @@ def fetch_gdelt_news(req: NewsRequest, deadline: datetime | None = None) -> News
             )
 
     deduped = _dedupe_news_documents(all_docs)
-    return NewsResponse(documents=deduped, missing_symbols=sorted(set(missing_symbols)), source="gdelt")
+    return NewsResponse(
+        documents=deduped,
+        missing_symbols=sorted(set(missing_symbols)),
+        source="gdelt",
+        metadata={
+            "rate_limited": rate_limited,
+            "deadline_reached": deadline_reached,
+            "requested_symbols": len(req.symbols),
+            "document_count": len(deduped),
+        },
+    )

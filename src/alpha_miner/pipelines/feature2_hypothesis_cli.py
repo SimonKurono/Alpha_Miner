@@ -6,10 +6,10 @@ import argparse
 import asyncio
 import json
 
-from google.adk.runners import InMemoryRunner
 from google.genai import types
 
 from alpha_miner.agents.hypothesis_generation.workflow import build_root_hypothesis_workflow
+from alpha_miner.pipelines.runtime_utils import build_runner
 
 
 def _parse_args() -> argparse.Namespace:
@@ -23,10 +23,25 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--text-coverage-min", type=float, default=None)
     parser.add_argument(
         "--model-policy",
-        choices=["claude_with_fallback", "claude_only", "deterministic_only"],
+        choices=["claude_with_fallback", "claude_only", "deterministic_only", "gemini_with_search", "gemini_only"],
         default=None,
     )
     parser.add_argument("--primary-model", default=None)
+    parser.add_argument("--gemini-model", default=None)
+    search_group = parser.add_mutually_exclusive_group()
+    search_group.add_argument(
+        "--enable-google-search-tool",
+        dest="enable_google_search_tool",
+        action="store_true",
+        help="Enable Google Search tool for Gemini generation.",
+    )
+    search_group.add_argument(
+        "--disable-google-search-tool",
+        dest="enable_google_search_tool",
+        action="store_false",
+        help="Disable Google Search tool for Gemini generation.",
+    )
+    parser.set_defaults(enable_google_search_tool=None)
     parser.add_argument("--max-debate-rounds", type=int, default=None)
     parser.add_argument("--user-id", default="local_user")
     parser.add_argument("--session-id", default="feature2")
@@ -35,7 +50,7 @@ def _parse_args() -> argparse.Namespace:
 
 async def _run(args: argparse.Namespace) -> int:
     root_agent = build_root_hypothesis_workflow(config_path=args.config)
-    runner = InMemoryRunner(agent=root_agent, app_name="alpha_miner_feature2")
+    runner = build_runner(root_agent, fallback_app_name="alpha_miner_feature2")
 
     try:
         session = await runner.session_service.create_session(
@@ -65,6 +80,10 @@ async def _run(args: argparse.Namespace) -> int:
         request["model_policy"] = args.model_policy
     if args.primary_model:
         request["primary_model"] = args.primary_model
+    if args.gemini_model:
+        request["gemini_model"] = args.gemini_model
+    if args.enable_google_search_tool is not None:
+        request["enable_google_search_tool"] = args.enable_google_search_tool
     if args.max_debate_rounds is not None:
         request["max_debate_rounds"] = args.max_debate_rounds
 
@@ -93,6 +112,7 @@ async def _run(args: argparse.Namespace) -> int:
                 "manifest": state.get("artifacts.hypothesis.manifest"),
                 "gate": state.get("hypothesis.gate"),
                 "hypothesis_count": len(state.get("hypothesis.final", [])),
+                "model_trace": f"artifacts/{state.get('run.meta', {}).get('run_id', 'unknown')}/model_trace.json",
                 "errors": state.get("errors.hypothesis", []),
             },
             indent=2,

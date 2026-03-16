@@ -7,11 +7,11 @@ import asyncio
 import json
 from pathlib import Path
 
-from google.adk.runners import InMemoryRunner
 from google.genai import types
 
 from alpha_miner.agents.data_ingestion.config_loader import load_feature1_config, resolve_symbols_from_config
 from alpha_miner.agents.data_ingestion.workflow import build_root_ingestion_workflow
+from alpha_miner.pipelines.runtime_utils import build_runner
 
 
 def _parse_args() -> argparse.Namespace:
@@ -43,7 +43,7 @@ def _resolve_symbols(args: argparse.Namespace, config_path: str) -> list[str] | 
 
 async def _run(args: argparse.Namespace) -> int:
     root_agent = build_root_ingestion_workflow(config_path=args.config)
-    runner = InMemoryRunner(agent=root_agent, app_name="alpha_miner_feature1")
+    runner = build_runner(root_agent, fallback_app_name="alpha_miner_feature1")
 
     try:
         session = await runner.session_service.create_session(

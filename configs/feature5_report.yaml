@@ -1,0 +1,5 @@
+defaults:
+  report_mode: deterministic_first
+  factor_selection_policy: promoted_plus_top_fallback
+  top_fallback_count: 3
+  max_runtime_sec: 300
